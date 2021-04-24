@@ -1,0 +1,239 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Amaranth&display=swap" rel="stylesheet">
+        <title>Genshin Impact Character List</title>
+    </head>
+    <body>
+        <div id="bg-overlay"></div>
+        <img id="logo" src="assets/img/logo_white.png">
+        <div id="content">
+            <div id="elements">
+                <button class="element" id="pyro"><img src="assets/img/element_pyro.png"></button>
+                <button class="element" id="hydro"><img src="assets/img/element_hydro.png"></button>
+                <button class="element" id="anemo"><img src="assets/img/element_anemo.png"></button>
+                <button class="element" id="electro"><img src="assets/img/element_electro.png"></button>
+                <button class="element" id="dendro"><img src="assets/img/element_dendro.png"></button>
+                <button class="element" id="cryo"><img src="assets/img/element_cryo.png"></button>
+                <button class="element" id="geo"><img src="assets/img/element_geo.png"></button>
+            </div>
+            <div id="character-dropdown">
+                <div class="characters" id="pyro-characters" onclick="toggleDilucInfo()">
+                    <img class="c-image" src="assets/img/Diluc.png">
+                    <div class="overlay" id="diluc">
+                        <h2 class="c-name">Diluc</h2>
+                    </div>
+                </div>
+                <div class="characters" id="hydro-characters" onclick="toggleTartagliaInfo()">
+                    <img class="c-image" src="assets/img/Tartaglia.png">
+                    <div class="overlay">
+                        <h2 class="c-name">Tartaglia</h2>
+                    </div>
+                </div>
+                <div class="characters" id="anemo-characters" onclick="toggleJeanInfo()">
+                    <img class="c-image" src="assets/img/Jean.png">
+                    <div class="overlay">
+                        <h2 class="c-name">Jean</h2>
+                    </div>
+                </div>
+                <div class="characters" id="electro-characters" onclick="toggleKeqingInfo()">
+                    <img class="c-image" src="assets/img/Keqing.png">
+                    <div class="overlay">
+                        <h2 class="c-name">Keqing</h2>
+                    </div>
+                </div>
+                <div class="characters" id="dendro-characters">
+                    <h2 id="coming-soon">Coming Soon!</h2>
+                </div>
+                <div class="characters" id="cryo-characters" onclick="toggleKaeyaInfo()">
+                    <img class="c-image" src="assets/img/Kaeya.png">
+                    <div class="overlay">
+                        <h2 class="c-name">Kaeya</h2>
+                    </div>
+                </div>
+                <div class="characters" id="geo-characters" onclick="toggleZhongliInfo()">
+                    <img class="c-image" src="assets/img/Zhongli.png">
+                    <div class="overlay">
+                        <h2 class="c-name">Zhongli</h2>
+                    </div>
+                </div>
+            </div>
+            <div id="character-info">
+                <div id="bg-box">
+                    <div class="info" id="diluc-info">
+                        <h1 class="name" id="diluc-name">Diluc</h1>
+                        <div class="img-slider"></div>
+                        <div class="mat-list">
+                            <div>Total Ascension Materials:</div>
+                            <ul>
+                                <li><img class="list-pic" src="assets/img/agnidus_agate_sliver.png">1 Agnidus Agate Sliver</li>
+                                <li><img class="list-pic" src="assets/img/agnidus_agate_fragment.png">9 Agnidus Agate Fragments</li>
+                                <li><img class="list-pic" src="assets/img/agnidus_agate_chunk.png">9 Agnidus Agate Chunks</li>
+                                <li><img class="list-pic" src="assets/img/agnidus_agate_gem.png">6 Agnidus Agate Gemstones</li>
+                                <li><img class="list-pic" src="assets/img/everflame_seed.png">46 Everflame Seeds</li>
+                                <li><img class="list-pic" src="assets/img/small_lamp_grass.png">168 Small Lamp Grass</li>
+                                <li><img class="list-pic" src="assets/img/recruit's_insignia.png">18 Recruit’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/sergeant's_insignia.png">30 Sergeant’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/lieutenant's_insignia.png">36 Lieutenant’s Insignias</li>
+                            </ul>
+                            <div>Total Talent Materials:</div>
+                            <ul>
+                                <li><img class="list-pic" src="assets/img/t_resistance.png">9 Teachings of Resistance</li>
+                                <li><img class="list-pic" src="assets/img/g_resistance.png">63 Guides to Resistance</li>
+                                <li><img class="list-pic" src="assets/img/p_resistance.png">114 Philosophies to Resistance</li>
+                                <li><img class="list-pic" src="assets/img/recruit's_insignia.png">18 Recruit’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/sergeant's_insignia.png">66 Sergeant’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/lieutenant's_insignia.png">93 Lieutenant’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/dvalin's_plume.png">18 Dvalin's Plumes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info" id="tartaglia-info">
+                        <h1 class="name" id="tartaglia-name">Tartaglia (Childe)</h1>
+                        <div class="img-slider">
+                            <img src="assets/img/childe1.jpg">
+                        </div>
+                        <div class="mat-list">
+                            <div class="mat-header">Total Ascension Materials:</div>
+                            <ul>
+                                <li><img class="list-pic" src="assets/img/varunada_lazurite_sliver.png">1 Varunada Lazurite Sliver</li>
+                                <li><img class="list-pic" src="assets/img/varunada_lazurite_fragment.png">9 Varunada Lazurite Fragments</li>
+                                <li><img class="list-pic" src="assets/img/varunada_lazurite_chunk.png">9 Varunada Lazurite Chunks</li>
+                                <li><img class="list-pic" src="assets/img/varunada_lazurite_gem.png">6 Varunada Lazurite Gemstones</li>
+                                <li><img class="list-pic" src="assets/img/cleansing_heart.png">46 Cleansing Hearts</li>
+                                <li><img class="list-pic" src="assets/img/starconch.png">168 Starconches</li>
+                                <li><img class="list-pic" src="assets/img/recruit's_insignia.png">18 Recruit’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/sergeant's_insignia.png">30 Sergeant’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/lieutenant's_insignia.png">36 Lieutenant’s Insignias</li>
+                            </ul>
+                            <div class="mat-header">Total Talent Materials:</div>
+                            <ul>
+                                <li><img class="list-pic" src="assets/img/t_freedom.png">9 Teachings of Freedom</li>
+                                <li><img class="list-pic" src="assets/img/g_freedom.png">63 Guides to Freedom</li>
+                                <li><img class="list-pic" src="assets/img/p_freedom.png">114 Philosophies to Freedom</li>
+                                <li><img class="list-pic" src="assets/img/recruit's_insignia.png">18 Recruit’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/sergeant's_insignia.png">66 Sergeant’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/lieutenant's_insignia.png">93 Lieutenant’s Insignias</li>
+                                <li><img class="list-pic" src="assets/img/shard_of_a_Foul_Legacy.png">18 Shards of Foul Legacy</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info" id="jean-info">
+                        <h1 class="name" id="jean-name">Jean</h1>
+                        <div class="img-slider"></div>
+                        <div class="mat-list">
+                            <div>Total Ascension Materials:</div>
+                            <ul>
+                                <li><img src="assets/img/vayuda_turquoise_sliver.png">1 Vayuda Turquoise Sliver</li>
+                                <li><img src="assets/img/vayuda_turquoise_fragment.png">9 Vayuda Turquoise Fragments</li>
+                                <li><img src="assets/img/vayuda_turquoise_chunk.png">9 Vayuda Turquoise Chunks</li>
+                                <li><img src="assets/img/vayuda_turquoise_gem.png">6 Vayuda Turquoise Gemstones</li>
+                                <li><img src="assets/img/hurricane_seed.png">46 Hurricane Seeds</li>
+                                <li><img src="assets/img/dandelion_seed.png">168 Dandelion Seeds</li>
+                                <li><img src="assets/img/damaged_mask.png">18 Damaged Masks</li>
+                                <li><img src="assets/img/stained_mask.png">30 Stained Masks</li>
+                                <li><img src="assets/img/ominous_mask.png">36 Ominous Masks</li>
+                            </ul>
+                            <div>Total Talent Materials:</div>
+                            <ul>
+                                <li><img src="assets/img/t_resistance.png">9 Teachings of Resistance</li>
+                                <li><img src="assets/img/g_resistance.png">63 Guides to Resistance</li>
+                                <li><img src="assets/img/p_resistance.png">114 Philosophies to Resistance</li>
+                                <li><img src="assets/img/damaged_mask.png">18 Damaged Masks</li>
+                                <li><img src="assets/img/stained_mask.png">66 Stained Masks</li>
+                                <li><img src="assets/img/ominous_mask.png">93 Ominous Masks</li>
+                                <li><img src="assets/img/dvalin's_plume.png">18 Dvalin's Plumes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info" id="keqing-info">
+                        <h1 class="name" id="keqing-name">Keqing</h1>
+                        <div class="img-slider"></div>
+                        <div class="mat-list">
+                            <div>Total Ascension Materials:</div>
+                            <ul>
+                                <li><img src="assets/img/vajrada_amethyst_sliver.png">1 Vajrada Amethyst Sliver</li>
+                                <li><img src="assets/img/vajrada_amethyst_fragment.png">9 Vajrada Amethyst Fragments</li>
+                                <li><img src="assets/img/vajrada_amethyst_chunk.png">9 Vajrada Amethyst Chunks</li>
+                                <li><img src="assets/img/vajrada_amethyst_gem.png">6 Vajrada Amethyst Gemstones</li>
+                                <li><img src="assets/img/lightning_prism.png">46 Lightning Prisms</li>
+                                <li><img src="assets/img/cor_lapis.png">168 Cor Lapises</li>
+                                <li><img src="assets/img/whopperflower_nectar.png">18 Whopperflower Nectars</li>
+                                <li><img src="assets/img/shimmering_nectar.png">30 Shimmering Nectars</li>
+                                <li><img src="assets/img/energy_nectar.png">36 Energy Nectars</li>
+                            </ul>
+                            <div>Total Talent Materials:</div>
+                            <ul>
+                                <li><img src="assets/img/t_prosperity.png">9 Teachings of Prosperity</li>
+                                <li><img src="assets/img/g_prosperity.png">63 Guides to Prosperity</li>
+                                <li><img src="assets/img/p_prosperity.png">114 Philosophies to Prosperity</li>
+                                <li><img src="assets/img/whopperflower_nectar.png">18 Whopperflower Nectars</li>
+                                <li><img src="assets/img/shimmering_nectar.png">66 Shimmering Nectars</li>
+                                <li><img src="assets/img/energy_nectar.png">93 Energy Nectars</li>
+                                <li><img src="assets/img/ring_of_boreas.png">18 Rings of Boreas</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info" id="kaeya-info">
+                        <h1 class="name" id="kaeya-name">Kaeya</h1>
+                        <div class="img-slider"></div>
+                        <div class="mat-list">
+                            <div>Total Ascension Materials:</div>
+                            <ul>
+                                <li><img src="assets/img/shivada_jade_sliver.png">1 Shivada Jade Sliver</li>
+                                <li><img src="assets/img/shivada_jade_fragment.png">9 Shivada Jade Fragments</li>
+                                <li><img src="assets/img/shivada_jade_chunk.png">9 Shivada Jade Chunks</li>
+                                <li><img src="assets/img/shivada_jade_gem.png">6 Shivada Jade Gemstones</li>
+                                <li><img src="assets/img/hoarfrost_core.png">46 Hoarfrost Cores</li>
+                                <li><img src="assets/img/calla_lily.png">168 Calla Lilies</li>
+                                <li><img src="assets/img/treasure_hoarder_insignia.png">18 Treasure Hoarder Insignias</li>
+                                <li><img src="assets/img/silver_raven_insignia.png">30 Silver Raven Insignias</li>
+                                <li><img src="assets/img/golden_raven_insignia.png">36 Golden Raven Insignias</li>
+                            </ul>
+                            <div>Total Talent Materials:</div>
+                            <ul>
+                                <li><img src="assets/img/t_ballad.png">9 Teachings of Ballad</li>
+                                <li><img src="assets/img/g_ballad.png">63 Guides to Ballad</li>
+                                <li><img src="assets/img/p_ballad.png">114 Philosophies to Ballad</li>
+                                <li><img src="assets/img/treasure_hoarder_insignia.png">18 Treasure Hoarder Insignias</li>
+                                <li><img src="assets/img/silver_raven_insignia.png">66 Silver Raven Insignias</li>
+                                <li><img src="assets/img/golden_raven_insignia.png">93 Golden Raven Insignias</li>
+                                <li><img src="assets/img/spirit_locket_of_boreas.png">18 Spirit Lockets of Boreas</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info" id="zhongli-info">
+                        <h1 class="name" id="zhongli-name">Zhongli</h1>
+                        <div class="img-slider"></div>
+                        <div class="mat-list">
+                            <div>Total Ascension Materials:</div>
+                            <ul>
+                                <li><img src="assets/img/prithiva_topaz_sliver.png">1 Prithiva Topaz Sliver</li>
+                                <li><img src="assets/img/prithiva_topaz_fragment.png">9 Prithiva Topaz Fragments</li>
+                                <li><img src="assets/img/prithiva_topaz_chunk.png">9 Prithiva Topaz Chunks</li>
+                                <li><img src="assets/img/prithiva_topaz_gem.png">6 Prithiva Topaz Gemstones</li>
+                                <li><img src="assets/img/basalt_pillar.png">46 Basalt Pillars</li>
+                                <li><img src="assets/img/cor_lapis.png">168 Cor Lapises</li>
+                                <li><img src="assets/img/slime_condensate.png">18 Slime Condensates</li>
+                                <li><img src="assets/img/slime_secretions.png">30 Slime Secretions</li>
+                                <li><img src="assets/img/slime_concentrate.png">36 Slime Concentrates</li>
+                            </ul>
+                            <div>Total Talent Materials:</div>
+                            <ul>
+                                <li><img src="assets/img/t_gold.png">9 Teachings of Gold</li>
+                                <li><img src="assets/img/g_gold.png">63 Guides to Gold</li>
+                                <li><img src="assets/img/p_gold.png">114 Philosophies to Gold</li>
+                                <li><img src="assets/img/slime_condensate.png">18 Slime Condensates</li>
+                                <li><img src="assets/img/slime_secretions.png">66 Slime Secretions</li>
+                                <li><img src="assets/img/slime_concentrate.png">93 Slime Concentrates</li>
+                                <li><img src="assets/img/tusk_of_monoceros_caeli.png">18 Tusks of Monoceros Caeli</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="assets/js/script.js"></script>
+    </body>
+</html>
