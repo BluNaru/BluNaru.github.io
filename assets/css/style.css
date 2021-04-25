@@ -1,7 +1,14 @@
+html {
+    overflow-y: scroll;
+}
+
 body {
     background-image: url("../img/background.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     z-index: 0;
+    cursor: url('../img/paimon_cursor.png') 32 32, auto;
 }
 
 #bg-overlay{
@@ -24,6 +31,7 @@ body {
     padding-top: 1%;
     width: 15%;
     z-index: 2;
+    cursor: url('../img/paimon2_cursor.png'), auto;
 }
 
 #elements {
@@ -33,15 +41,36 @@ body {
     flex-wrap: nowrap;
     margin-top: 12%;
     margin-bottom: 6%;
+    margin-left: -3%;
 }
 
 .element {
-    margin-left: 4%;
+    margin-left: 5vw;
+    margin-right: 5vw;
     background: none;
     border: none;
     outline: none;
-    cursor: pointer;
     z-index: 2;
+    width: 1vw;
+    height: auto;
+    max-width: 1vw;
+    transform-origin: center;
+    transition-property: opacity, transform;
+}
+
+.element:hover {
+    cursor: url('../img/paimon2_cursor.png') 32 32, auto;
+    opacity: 1;
+    transform: scale(1.1);
+    animation-name: pulse;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+    0% {opacity: 1; transform: scale(1.1);}
+	50% {opacity: 0.8; transform: scale(0.9);}
+	100% {opacity: 1; transform: scale(1.1);}
 }
 
 .characters {
@@ -49,35 +78,64 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+    display: flex;
+    flex-direction: row;
+}
+
+.c {
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
 .c-image {
-    width: 30%;
+    width: 6vw;
     z-index: 3;
     border: 3px solid black;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 0;
+    transform-origin: top;
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
 }
 
-.characters:hover .overlay {
-    opacity: 80%;
-    cursor: pointer;
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
 }
 
 .overlay{
     background-color: black;
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-left: 1vw;
+    margin-right: 1vw;
+    top: 0vw;
     height: 100%;
-    width: 31%;
+    width: 6.1vw;
     opacity: 0;
     transition: 0.3s;
     overflow: hidden;
     z-index: 3;
+}
+
+#overlay-diluc, #overlay-tartaglia, #overlay-jean, #overlay-beidou, #overlay-kaeya, #overlay-albedo {
+    left: 0.15vw;
+}
+
+#overlay-diluc:hover, #overlay-tartaglia:hover, #overlay-jean:hover, #overlay-beidou:hover, #overlay-kaeya:hover, #overlay-albedo:hover{
+    opacity: 80%;
+    cursor: url('../img/paimon2_cursor.png') 32 32, auto;
+}
+
+#overlay-klee, #overlay-xingqiu, #overlay-xiao, #overlay-keqing, #overlay-qiqi, #overlay-zhongli {
+    left: 8.68vw;
+}
+
+#overlay-klee:hover, #overlay-xingqiu:hover, #overlay-xiao:hover, #overlay-keqing:hover, #overlay-qiqi:hover, #overlay-zhongli:hover {
+    opacity: 80%;
+    cursor: url('../img/paimon2_cursor.png') 32 32, auto;
 }
 
 .c-name, #dendro-characters{
@@ -96,36 +154,25 @@ body {
     transform: translateX(-50%);
 }
 
-#character-info {
-    
-}
-
 #bg-box {
     background-color: black;
-    margin-top: 17%;
+    margin-top: 15vw;
     margin-left: 2%;
     margin-right: 2%;
+    margin-bottom: 3%;
     z-index: 4;
     width: 96%;
-    height: 150%;
-}
-
-.img-slider {
-    position: relative;
-    right: -30%;
-    width: 75%;
-    height: 20%;
-    border: 3px solid white;
-    overflow: hidden;
+    height: 58vw;
+    border-radius: 2%;
 }
 
 .name {
     text-align: right;
     position: relative;
-    right: 0%;
+    right: -15vw;
     color: white;
     font-family: 'Amaranth', sans-serif;
-    font-size: 4em;
+    font-size: 4vw;
 }
 
 .info {
@@ -139,9 +186,9 @@ body {
     text-align: left;
     color: white;
     font-family: 'Amaranth', sans-serif;
-    font-size: large;
+    font-size: 1.3vw;
     position: absolute;
-    left: -5%;
+    left: -15vw;
     top: 10%;
 }
 
@@ -159,7 +206,70 @@ ul {
 }
 
 .mat-header {
-    font-size: x-large;
+    font-size: 1.8vw;
+}
+
+.img-slider {
+    position: relative;
+    right: -17vw;
+    width: 50vw;
+    height: 30vw;
+    border: 3px solid white;
+    overflow: hidden;
+}
+
+.image {
+    width: 50vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#slider-images-diluc, #slider-images-klee, #slider-images-tartaglia, #slider-images-xingqiu, #slider-images-jean, #slider-images-xiao, #slider-images-beidou, #slider-images-keqing, #slider-images-kaeya, #slider-images-qiqi, #slider-images-albedo, #slider-images-zhongli {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    transition: 1s;
+    left: 0px;
+}
+
+.slider-buttons {
+    position: absolute;
+    margin-top: 27vw;
+    margin-left: 19vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index: 5;
+}
+
+.slider-button {
+    border: 2px solid white;
+    border-radius: 50%;
+    padding: 0.5vw;
+    margin: 1vw;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider-button:hover {
+    background: white;
+}
+
+.four-star {
+    width: 22vw;
+    height: auto;
+    position: absolute;
+    right: -17vw;
+    top: 43vw;
+}
+
+.five-star {
+    width: 25vw;
+    height: auto;
+    position: absolute;
+    right: -16vw;
+    top: 41vw;
 }
 
 .hidden {
