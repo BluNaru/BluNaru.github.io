@@ -113,7 +113,7 @@ body {
     margin-right: 1vw;
     top: 0vw;
     height: 100%;
-    width: 6.8vw;
+    width: 6.4vw;
     opacity: 0;
     transition: 0.3s;
     overflow: hidden;
@@ -121,7 +121,7 @@ body {
 }
 
 #overlay-diluc, #overlay-tartaglia, #overlay-jean, #overlay-beidou, #overlay-kaeya, #overlay-albedo {
-    left: -0.35vw;
+    left: -0.15vw;
 }
 
 #overlay-diluc:hover, #overlay-tartaglia:hover, #overlay-jean:hover, #overlay-beidou:hover, #overlay-kaeya:hover, #overlay-albedo:hover{
@@ -130,7 +130,7 @@ body {
 }
 
 #overlay-klee, #overlay-xingqiu, #overlay-xiao, #overlay-keqing, #overlay-qiqi, #overlay-zhongli {
-    left: 8.5vw;
+    left: 8.35vw;
 }
 
 #overlay-klee:hover, #overlay-xingqiu:hover, #overlay-xiao:hover, #overlay-keqing:hover, #overlay-qiqi:hover, #overlay-zhongli:hover {
