@@ -19,9 +19,8 @@ document.getElementById("kaeya-info").classList.add("hidden");
 document.getElementById("qiqi-info").classList.add("hidden");
 document.getElementById("albedo-info").classList.add("hidden");
 document.getElementById("zhongli-info").classList.add("hidden");
-let activeID = null;
-let activeCharaID = null;
-let curSlider = null;
+let activeE = -1; //pyro=0,hydro=1,anemo=2,electro=3,dendro=4,cryo=5,geo=6
+let activeCharaID = -1; //diluc=0,klee=1,childe=2,xingqiu=3,jean=4,xiao=5,beidou=6,keqing=7,kaeya=8,qiqi=9,albedo=10,zhongli=11
 let imageNum = 0;
 let imageMax = 4;
 let timeout = null;
@@ -29,426 +28,143 @@ let b1 = null;
 let b2 = null;
 let b3 = null;
 let b4 = null;
+let sliderWidth = convertVWtoPX(50) + 8;
 
 function reload() {
     window.location.reload();
 }
 
 function toggleCharaHidden(elementID) {
-    document.getElementById(elementID).classList.toggle("hidden");
-    activeID = elementID;
+    document.getElementsByClassName("characters")[elementID].classList.toggle("hidden");
+    activeE = elementID;
+}
+
+function toggleElementHidden(elem) {
+    if (activeE != -1 && activeE != elem) { //different icon is open, closes it
+        toggleCharaHidden(activeE);
+        toggleCharaHidden(elem);
+    } else if (activeE == elem) { //click same icon already active
+        toggleCharaHidden(elem);
+        activeE = -1;
+    } else {
+        toggleCharaHidden(elem); //none open
+    }
 }
 
 function togglePyroHidden() {
-    if (activeID != null && activeID != "pyro-characters") { //different icon is open, closes it
-        toggleCharaHidden(activeID);
-        toggleCharaHidden("pyro-characters");
-    } else if (activeID == "pyro-characters") { //click same icon already active
-        toggleCharaHidden("pyro-characters");
-        activeID = null;
-    } else {
-        toggleCharaHidden("pyro-characters"); //none open
-    }
+    toggleElementHidden(0);
 }
 document.getElementById("pyro").onclick = togglePyroHidden;
 
 function toggleHydroHidden() {
-    if (activeID != null && activeID != "hydro-characters") { //different icon is open, closes it
-        toggleCharaHidden(activeID);
-        toggleCharaHidden("hydro-characters");
-    } else if (activeID == "hydro-characters") { //click same icon already active
-        toggleCharaHidden("hydro-characters");
-        activeID = null;
-    } else {
-        toggleCharaHidden("hydro-characters"); //none open
-    }
+    toggleElementHidden(1);
 }
 document.getElementById("hydro").onclick = toggleHydroHidden;
 
 function toggleAnemoHidden() {
-    if (activeID != null && activeID != "anemo-characters") { //different icon is open, closes it
-        toggleCharaHidden(activeID);
-        toggleCharaHidden("anemo-characters");
-    } else if (activeID == "anemo-characters") { //click same icon already active
-        toggleCharaHidden("anemo-characters");
-        activeID = null;
-    } else {
-        toggleCharaHidden("anemo-characters"); //none open
-    }
+    toggleElementHidden(2);
 }
 document.getElementById("anemo").onclick = toggleAnemoHidden;
 
 function toggleElectroHidden() {
-    if (activeID != null && activeID != "electro-characters") { //different icon is open, closes it
-        toggleCharaHidden(activeID);
-        toggleCharaHidden("electro-characters");
-    } else if (activeID == "electro-characters") { //click same icon already active
-        toggleCharaHidden("electro-characters");
-        activeID = null;
-    } else {
-        toggleCharaHidden("electro-characters"); //none open
-    }
+    toggleElementHidden(3);
 }
 document.getElementById("electro").onclick = toggleElectroHidden;
 
 function toggleDendroHidden() {
-    if (activeID != null && activeID != "dendro-characters") { //different icon is open, closes it
-        toggleCharaHidden(activeID);
-        toggleCharaHidden("dendro-characters");
-    } else if (activeID == "dendro-characters") { //click same icon already active
-        toggleCharaHidden("dendro-characters");
-        activeID = null;
-    } else {
-        toggleCharaHidden("dendro-characters"); //none open
-    }
+    toggleElementHidden(4);
 }
 document.getElementById("dendro").onclick = toggleDendroHidden;
 
 function toggleCryoHidden() {
-    if (activeID != null && activeID != "cryo-characters") { //different icon is open, closes it
-        toggleCharaHidden(activeID);
-        toggleCharaHidden("cryo-characters");
-    } else if (activeID == "cryo-characters") { //click same icon already active
-        toggleCharaHidden("cryo-characters");
-        activeID = null;
-    } else {
-        toggleCharaHidden("cryo-characters"); //none open
-    }
+    toggleElementHidden(5);
 }
 document.getElementById("cryo").onclick = toggleCryoHidden;
 
 function toggleGeoHidden() {
-    if (activeID != null && activeID != "geo-characters") { //different icon is open, closes it
-        toggleCharaHidden(activeID);
-        toggleCharaHidden("geo-characters");
-    } else if (activeID == "geo-characters") { //click same icon already active
-        toggleCharaHidden("geo-characters");
-        activeID = null;
-    } else {
-        toggleCharaHidden("geo-characters"); //none open
-    }
+    toggleElementHidden(6);
 }
 document.getElementById("geo").onclick = toggleGeoHidden;
 
-function toggleInfoHidden(charaID,sliderID) {
-    document.getElementById(charaID).classList.toggle("hidden");
+function toggleInfoHidden(charaID) {
+    document.getElementsByClassName("info")[charaID].classList.toggle("hidden");
     activeCharaID = charaID;
-    curSlider = sliderID;
+}
+
+function toggleCharaInfo(charaNum) {
+    if (activeCharaID != -1 && activeCharaID != charaNum) { 
+        toggleInfoHidden(activeCharaID);
+        toggleInfoHidden(charaNum);
+        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
+        imageNum = 0;
+        buttonChange(charaNum);
+        showSlides();
+    } else if (activeCharaID == charaNum) { 
+        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
+        setTimeout(function() {
+            toggleInfoHidden(charaNum);
+            document.getElementById("bg-box").classList.add("hidden");
+            activeCharaID = null;
+            clearTimeout(timeout);}, 350);
+    } else {
+        document.getElementById("bg-box").classList.remove("hidden");
+        toggleInfoHidden(charaNum); 
+        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
+        imageNum = 0;
+        buttonChange(charaNum);
+        showSlides();
+    }
 }
 
 function toggleDilucInfo() {
-    if (activeCharaID != null && activeCharaID != "diluc-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("diluc-info","slider-images-diluc");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(0);
-        showSlides();
-    } else if (activeCharaID == "diluc-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("diluc-info", "slider-images-diluc");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("diluc-info","slider-images-diluc"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(0);
-        showSlides();
-    }
+    toggleCharaInfo(0);
 }
 
 function toggleKleeInfo() {
-    if (activeCharaID != null && activeCharaID != "klee-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("klee-info","slider-images-klee");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(1);
-        showSlides();
-    } else if (activeCharaID == "klee-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("klee-info", "slider-images-klee");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("klee-info","slider-images-klee"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(1);
-        showSlides();
-    }
+    toggleCharaInfo(1);
 }
 
 function toggleTartagliaInfo() {
-    if (activeCharaID != null && activeCharaID != "tartaglia-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("tartaglia-info","slider-images-tartaglia");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(2);
-        showSlides();
-    } else if (activeCharaID == "tartaglia-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("tartaglia-info","slider-images-tartaglia");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("tartaglia-info","slider-images-tartaglia"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(2);
-        showSlides();
-    }
+    toggleCharaInfo(2);
 }
 
 function toggleXingqiuInfo() {
-    if (activeCharaID != null && activeCharaID != "xingqiu-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("xingqiu-info","slider-images-xingqiu");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(3);
-        showSlides();
-    } else if (activeCharaID == "xingqiu-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("xingqiu-info","slider-images-xingqiu");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("xingqiu-info","slider-images-xingqiu"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(3);
-        showSlides();
-    }
+    toggleCharaInfo(3);
 }
 
 function toggleJeanInfo() {
-    if (activeCharaID != null && activeCharaID != "jean-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("jean-info","slider-images-jean");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(4);
-        showSlides();
-    } else if (activeCharaID == "jean-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("jean-info","slider-images-jean");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("jean-info","slider-images-jean"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(4);
-        showSlides();
-    }
+    toggleCharaInfo(4);
 }
 
 function toggleXiaoInfo() {
-    if (activeCharaID != null && activeCharaID != "xiao-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("xiao-info","slider-images-xiao");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(5);
-        showSlides();
-    } else if (activeCharaID == "xiao-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("xiao-info","slider-images-xiao");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("xiao-info","slider-images-xiao"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(5);
-        showSlides();
-    }
+    toggleCharaInfo(5);
 }
 
 function toggleBeidouInfo() {
-    if (activeCharaID != null && activeCharaID != "beidou-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("beidou-info","slider-images-beidou");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(6);
-        showSlides();
-    } else if (activeCharaID == "beidou-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("beidou-info","slider-images-beidou");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("beidou-info","slider-images-beidou"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(6);
-        showSlides();
-    }
+    toggleCharaInfo(6);
 }
 
 function toggleKeqingInfo() {
-    if (activeCharaID != null && activeCharaID != "keqing-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("keqing-info","slider-images-keqing");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(7);
-        showSlides();
-    } else if (activeCharaID == "keqing-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("keqing-info","slider-images-keqing");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("keqing-info","slider-images-keqing"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(7);
-        showSlides();
-    }
+    toggleCharaInfo(7);
 }
 
 function toggleKaeyaInfo() {
-    if (activeCharaID != null && activeCharaID != "kaeya-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("kaeya-info","slider-images-kaeya");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(8);
-        showSlides();
-    } else if (activeCharaID == "kaeya-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("kaeya-info","slider-images-kaeya");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("kaeya-info","slider-images-kaeya"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(8);
-        showSlides();
-    }
+    toggleCharaInfo(8);
 }
 
 function toggleQiqiInfo() {
-    if (activeCharaID != null && activeCharaID != "qiqi-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("qiqi-info","slider-images-qiqi");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(9);
-        showSlides();
-    } else if (activeCharaID == "qiqi-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("qiqi-info","slider-images-qiqi");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("qiqi-info","slider-images-qiqi"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(9);
-        showSlides();
-    }
+    toggleCharaInfo(9);
 }
 
 function toggleAlbedoInfo() {
-    if (activeCharaID != null && activeCharaID != "albedo-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("albedo-info","slider-images-albedo");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(10);
-        showSlides();
-    } else if (activeCharaID == "albedo-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("albedo-info","slider-images-albedo");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("albedo-info","slider-images-albedo"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(10);
-        showSlides();
-    }
+    toggleCharaInfo(10);
 }
 
 function toggleZhongliInfo() {
-    if (activeCharaID != null && activeCharaID != "zhongli-info") { 
-        toggleInfoHidden(activeCharaID,curSlider);
-        toggleInfoHidden("zhongli-info","slider-images-zhongli");
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(11);
-        showSlides();
-    } else if (activeCharaID == "zhongli-info") { 
-        document.getElementById("logo").scrollIntoView({behavior:"smooth"});
-        setTimeout(function() {
-            toggleInfoHidden("zhongli-info","slider-images-zhongli");
-            document.getElementById("bg-box").classList.add("hidden");
-            activeCharaID = null;
-            curSlider = null;
-            clearTimeout(timeout);}, 350);
-    } else {
-        document.getElementById("bg-box").classList.remove("hidden");
-        toggleInfoHidden("zhongli-info","slider-images-zhongli"); 
-        document.getElementById("bg-box").scrollIntoView({behavior:"smooth"});
-        imageNum = 0;
-        buttonChange(11);
-        showSlides();
-    }
+    toggleCharaInfo(11);
 }
 
-function buttonChange(charaCount) { //diluc=0,klee=1,childe=2,xingqiu=3,jean=4,xiao=5,beidou=6,keqing=7,kaeya=8,qiqi=9,albedo=10,zhongli=11
+function buttonChange(charaCount) {
     b1 = document.querySelectorAll(".button1")[charaCount];
     b2 = document.querySelectorAll(".button2")[charaCount];
     b3 = document.querySelectorAll(".button3")[charaCount];
@@ -459,26 +175,26 @@ function convertVWtoPX(vw) {
 	return vw * (document.documentElement.clientWidth / 100);
 }
 
-let sliderWidth = convertVWtoPX(50) + 8;
+
 
 function clickImage1() {
     imageNum = 0;
-    loadImage(curSlider);
+    loadImage(activeCharaID);
 }
 
 function clickImage2() {
     imageNum = 1;
-    loadImage(curSlider);
+    loadImage(activeCharaID);
 }
 
 function clickImage3() {
     imageNum = 2;
-    loadImage(curSlider);
+    loadImage(activeCharaID);
 }
 
 function clickImage4() {
     imageNum = 3;
-    loadImage(curSlider);
+    loadImage(activeCharaID);
 }
 
 function clearDotColor() {
@@ -488,7 +204,7 @@ function clearDotColor() {
     b4.style.backgroundColor = "";
 }
 
-function loadImage(sliderID) {
+function loadImage(charaID) {
     clearDotColor();
     if (imageNum == 0) {
         b1.style.backgroundColor = "white";
@@ -501,11 +217,11 @@ function loadImage(sliderID) {
     }
     sliderWidth = convertVWtoPX(50) + 8;
     pixels = sliderWidth * imageNum;
-	document.getElementById(sliderID).style.left = -pixels;
+	document.getElementsByClassName("slider")[charaID].style.left = -pixels;
 }
 
 function showSlides() {
-    loadImage(curSlider);
+    loadImage(activeCharaID);
     if (imageNum == imageMax-1) {
         imageNum = 0;
     } else {

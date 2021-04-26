@@ -225,7 +225,7 @@ ul {
     transform: translateX(-50%);
 }
 
-#slider-images-diluc, #slider-images-klee, #slider-images-tartaglia, #slider-images-xingqiu, #slider-images-jean, #slider-images-xiao, #slider-images-beidou, #slider-images-keqing, #slider-images-kaeya, #slider-images-qiqi, #slider-images-albedo, #slider-images-zhongli {
+.slider {
     display: flex;
     flex-direction: row;
     position: relative;
